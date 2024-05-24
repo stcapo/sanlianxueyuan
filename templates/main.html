@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sidebar Template</title>
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
+    .sidebar {
+        height: 100%;
+        width: 250px;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: #111;
+        overflow-x: hidden;
+        padding-top: 20px;
+    }
+    .sidebar a {
+        padding: 10px 15px;
+        text-decoration: none;
+        font-size: 18px;
+        color: #818181;
+        display: block;
+    }
+    .sidebar a:hover {
+        color: #f1f1f1;
+    }
+    .main-content {
+        margin-left: 250px; /* Same as the width of the sidebar */
+        padding: 0px 10px;
+    }
+    @media screen and (max-width: 700px) {
+        .sidebar {
+            width: 100%;
+            height: auto;
+            position: relative;
+        }
+        .sidebar a {float: left;}
+        .main-content {margin-left: 0;}
+    }
+    @media screen and (max-width: 400px) {
+        .sidebar a {
+            text-align: center;
+            float: none;
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+    <a href="#" onclick="loadFer(); return false;">就业率分布</a>
+    <a href="#" onclick="loadDegreeDistribution(); return false;">学历分布</a>
+    <a href="#" onclick="loadSalaryDistribution(); return false">薪资分布</a>
+    <a href="#" onclick="loadFertilityDistribution(); return false">生育情况</a>
+</div>
+
+<div class="main-content">
+    <h2>Main Content</h2>
+    <iframe id="fer" style="width: 100%; height: 600px; border: none;"></iframe>
+    <iframe id="degreeDistributionIframe" style="width: 100%; height: 600px; border: none;"></iframe>
+    <iframe id="SalaryDistributionIframe" style="width: 100%; height: 600px; border: none;"></iframe>
+    <iframe id="FertilityDistributionIframe" style="width: 100%; height: 600px; border: none;"></iframe>
+</div>
+
+
+<script>
+function loadDegreeDistribution() {
+    document.getElementById('degreeDistributionIframe').src = '/degree_distribution';
+}
+    function loadFertilityDistribution() {
+    document.getElementById('FertilityDistributionIframe').src = '/fertility_distribution';
+}
+function loadSalaryDistribution() {
+    document.getElementById('SalaryDistributionIframe').src = '/salary_distribution';
+}
+    function loadFer() {
+    document.getElementById('fer').src = '/fer';
+}
+</script>
+
+</body>
+</html>

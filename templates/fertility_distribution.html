@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生育率分布</title>
+    <!-- 引入 ECharts 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <!-- 准备一个用于 ECharts 图表的 DOM -->
+    <div id="main" style="width: 800px;height:600px;"></div>
+    <script>
+        var myChart = echarts.init(document.getElementById('main'));
+         // 获取从 Flask 传递的数据
+        var data = {{ data | safe }}
+        // 获取年份
+        const yearList=[]
+        for (let year = 2000; year <= 2023; year++) {
+            yearList.push(year);
+        }
+        const educationLevels = Object.keys(data);  // 获取教育水平
+        option = {
+  title: {
+    text: '不同教育的生育情况'
+  },
+  tooltip: {
+    trigger: 'axis'
+  },
+  legend: {
+    data: educationLevels,
+    padding:25
+  },
+  grid: {
+    left: '3%',
+    right: '4%',
+    bottom: '3%',
+    containLabel: true
+  },
+  toolbox: {
+    feature: {
+      saveAsImage: {}
+    }
+  },
+  xAxis: {
+    type: 'category',
+    boundaryGap: false,
+    data: yearList
+  },
+  yAxis: {
+    type: 'value'
+  },
+  series: [
+    {
+      name: '未受过正式教育',
+      type: 'line',
+      stack: 'Total',
+      data: data.未受过正式教育
+    },
+    {
+      name: '小学',
+      type: 'line',
+      stack: 'Total',
+      data: data.小学
+    },
+    {
+      name: '初中',
+      type: 'line',
+      stack: 'Total',
+      data: data.初中
+    },
+    {
+      name: '高中',
+      type: 'line',
+      stack: 'Total',
+      data: data.高中
+    },
+    {
+      name: '大专',
+      type: 'line',
+      stack: 'Total',
+      data: data.大专
+    },
+    {
+        name: '本科及以上',
+        type: 'line',
+        stack: 'Total',
+        data: data.本科及以上
+    }
+  ]
+};
+        myChart.setOption(option);
+
+
+    </script>
+</body>
+</html>

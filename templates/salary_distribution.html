@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>女性教育程度分布可视化</title>
+    <!-- 引入 ECharts 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+</head>
+<body>
+    <!-- 准备一个用于 ECharts 图表的 DOM -->
+    <div id="main" style="width: 800px;height:600px;"></div>
+    <script>
+        var myChart = echarts.init(document.getElementById('main'));
+        var result = {{data|safe}}
+        console.log(result.regions)
+        option = {
+          xAxis: {
+            type: 'category',
+            data: result.regions
+          },
+          yAxis: {
+            type: 'value'
+          },
+          series: result.series
+        };
+        myChart.setOption(option);
+    </script>
+
+</body>
+</html>

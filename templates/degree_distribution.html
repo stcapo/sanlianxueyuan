@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>女性教育程度分布可视化</title>
+    <!-- 引入 ECharts 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+</head>
+<body>
+    <!-- 准备一个用于 ECharts 图表的 DOM -->
+    <div id="main" style="width: 800px;height:600px;"></div>
+    <script>
+        var myChart = echarts.init(document.getElementById('main'));
+        var data = {{data|safe}}
+        var option = {
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: { type: 'shadow' }
+            },
+            legend: { data: ['本科', '未受教育', '小学', '初中', '高中', '大专'] },
+            grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
+            xAxis: { type: 'value' },
+            yAxis: { type: 'category', data: data.regions },
+            series: data.series
+        };
+        myChart.setOption(option);
+    </script>
+<!--    <script>-->
+<!--        // 初始化 ECharts 实例-->
+<!--        var myChart = echarts.init(document.getElementById('main'));-->
+
+<!--        // 发起 AJAX 请求获取数据-->
+<!--        fetch('http://localhost:5000/get_degree_distribution_data')-->
+<!--            .then(response => response.json())-->
+<!--            .then(data => {-->
+<!--                // 使用返回的数据设置 ECharts 配置-->
+<!--                var option = {-->
+<!--                    tooltip: {-->
+<!--                        trigger: 'axis',-->
+<!--                        axisPointer: { type: 'shadow' }-->
+<!--                    },-->
+<!--                    legend: { data: ['本科', '未受教育', '小学', '初中', '高中', '大专'] },-->
+<!--                    grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },-->
+<!--                    xAxis: { type: 'value' },-->
+<!--                    yAxis: { type: 'category', data: data.regions },-->
+<!--                    series: data.series-->
+<!--                };-->
+
+<!--                // 设置选项并重新渲染图表-->
+<!--                myChart.setOption(option);-->
+<!--            })-->
+<!--            .catch(error => console.error('Error:', error));-->
+<!--    </script>-->
+</body>
+</html>
